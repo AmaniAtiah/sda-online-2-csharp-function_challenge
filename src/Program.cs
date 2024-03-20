@@ -4,6 +4,27 @@ namespace FunctionChallenges
 {
     class Program
     {
+        public static void StringNumberProcessor(params object[] objects)
+        {
+            int total = 0;
+            string concatenatedString = "";
+
+            foreach (object obj in objects)
+            {
+                if (obj.GetType() == typeof(int))
+                {
+                    total += Convert.ToInt32(obj);
+                }
+                else
+                {
+                    concatenatedString += obj.ToString() + " ";
+                }
+            }
+
+            Console.WriteLine($"{concatenatedString}; {total}");
+        }
+
+
         static void Main(string[] args)
         {
             // Challenge 1: String and Number Processor
@@ -13,10 +34,10 @@ namespace FunctionChallenges
             // Challenge 2: Object Swapper
             Console.WriteLine("\nChallenge 2: Object Swapper");
             int num1 = 25, num2 = 30;
-            int num 3 = 10, num4 = 30;
+            int num3 = 10, num4 = 30;
             string str1 = "HelloWorld", str2 = "Programming";
             string str3 = "Hi", str4 = "Programming";
-                          
+
             SwapObjects(ref num1, ref num2); // Expected outcome: num1 = 30, num2 = 25  
             SwapObjects(ref num3, ref num4); // Error: Value must be more than 18
 
