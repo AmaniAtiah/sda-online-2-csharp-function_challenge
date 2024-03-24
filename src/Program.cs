@@ -28,7 +28,7 @@ namespace FunctionChallenges
         public static void GuessingGame()
         {
             Random rand = new Random();
-            int randomNumber = rand.Next(1, 100);
+            int randomNumber = rand.Next(1, 101);
 
             while (true)
             {
@@ -93,17 +93,20 @@ namespace FunctionChallenges
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return sentence;
             }
         }
-        
+
 
         public static void SwapObjects<T>(ref T obj1, ref T obj2)
         {
             try
             {
+                if (obj1.GetType() != obj2.GetType())
+                {
+                    throw new ArgumentException("Error: Objects must be of the same type");
 
-                if (typeof(T) == typeof(int))
+                } else if (typeof(T) == typeof(int))
                 {
                     int num1 = Convert.ToInt32(obj1);
                     int num2 = Convert.ToInt32(obj2);
@@ -141,11 +144,7 @@ namespace FunctionChallenges
                     obj2 = (T)(object)str2;
 
                 }
-                else if (obj1.GetType() != obj2.GetType())
-                {
-                    throw new ArgumentException("Error: Objects must be of the same type");
-
-                }
+                 
                 else
                 {
                     throw new ArgumentException("Error: Upsupported data type");
@@ -153,10 +152,15 @@ namespace FunctionChallenges
 
 
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
         }
 
 
@@ -182,17 +186,18 @@ namespace FunctionChallenges
             string str3 = "Hi", str4 = "Programming";
 
             SwapObjects(ref num1, ref num2); // Expected outcome: num1 = 30, num2 = 25  
+            Console.WriteLine($"Numbers: {num1}, {num2}");
             SwapObjects(ref num3, ref num4); // Error: Value must be more than 18
 
             SwapObjects(ref str1, ref str2); // Expected outcome: str1 = "Programming", str2 = "HelloWorld"
+            Console.WriteLine($"Strings: {str1}, {str2}");
             SwapObjects(ref str3, ref str4); // Error: Length must be more than 5
 
             // SwapObjects(true, false); // Error: Upsupported data type
             // SwapObjects(ref num1, str1); // Error: Objects must be of same types
 
-            Console.WriteLine($"Numbers: {num1}, {num2}");
-            Console.WriteLine($"Strings: {str1}, {str2}");
-
+            
+    
             // Challenge 3: Guessing Game
             Console.WriteLine("\nChallenge 3: Guessing Game");
             // Uncomment to test the GuessingGame method
